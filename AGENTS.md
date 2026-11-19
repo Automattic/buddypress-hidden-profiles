@@ -41,16 +41,13 @@ npx wp-env start             # WordPress with BuddyPress active
 
 ## Conventions
 
-Follow the standards in `~/code/plugin-standards/`. Key points:
+See `CONTRIBUTING.md` for setup, checks and the contribution workflow. Key points:
 
-- **Commits**: Use the `/commit` skill. Commits must be signed.
-- **PRs**: Use the `/pr` skill and target `develop`. On every PR, set:
-  - a milestone (the next version if one exists, otherwise `Next`)
-  - a label from the standard set in `LABELS.md` (`type: ...`)
-  - the assignee `GaryJones`
-- **Linear**: Work is tracked in the `VIPPLUG` team, with the `Plugin` label `BuddyPress Hidden Profiles`. Link a PR to its issue with `Fixes VIPPLUG-123` in the description.
+- **Commits**: Every commit must be signed; `develop` and `main` reject unsigned commits. Use a [Conventional Commits](https://www.conventionalcommits.org/) prefix (`fix:`, `feat:`, `test:`, `docs:`, `ci:`, `chore:` and so on) with an imperative subject of about 50 characters, and a body that explains why the change was needed rather than what changed. One concern per commit.
+- **PRs**: Open against `develop`. The title describes the outcome in sentence case, without a conventional commit prefix. The description explains the problem first, then how the PR solves it. PRs land as merge commits (squash and rebase merging are disabled), so every commit message reaches `develop` as written.
 - **Tests**: Integration tests only, in `tests/Integration/`, one file per feature, extending the shared `TestCase` there for its fixtures. There is no unit suite, because the plugin is thin glue around WordPress and BuddyPress.
-- **i18n**: User-facing strings use the `buddypress-hidden-profiles` text domain.
+- **Code style**: WordPress VIP coding standards via PHPCS, configured in `.phpcs.xml.dist`. Tabs for indentation.
+- **i18n**: All user-facing strings must use the `buddypress-hidden-profiles` text domain.
 
 ## Common Pitfalls
 
