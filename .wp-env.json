@@ -4,7 +4,7 @@
     "https://downloads.wordpress.org/plugin/buddypress.zip"
   ],
   "core": "WordPress/WordPress#master",
-  "phpVersion": "8.4",
+  "phpVersion": "8.5",
   "testsEnvironment": false,
   "config": {
     "WP_DEBUG": true,
