@@ -45,9 +45,11 @@ jobs:
           # The WP version in the readme's "Tested up to", with the latest PHP.
           - wordpress: '7.1'
             php: '8.5'
-          # Check latest WP with the latest PHP.
+          # Check latest WP with the latest PHP. Held on 8.5 until BuddyPress
+          # releases its fix for BP_Nouveau_Customizer_Group_Nav, whose
+          # constructor returns a WP_Error, which PHP 8.6 deprecates.
           - wordpress: 'master'
-            php: '8.6'
+            php: '8.5'
 
     env:
       WP_ENV_CORE: WordPress/WordPress#${{ matrix.wordpress }}
