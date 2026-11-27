@@ -45,11 +45,12 @@ jobs:
           # The WP version in the readme's "Tested up to", with the latest PHP.
           - wordpress: '7.1'
             php: '8.5'
-          # Check latest WP with the latest PHP. Held on 8.5 until BuddyPress
-          # releases its fix for BP_Nouveau_Customizer_Group_Nav, whose
-          # constructor returns a WP_Error, which PHP 8.6 deprecates.
+          # Check latest WP and BuddyPress with the latest PHP. BuddyPress
+          # trunk, because 14.5.7 raises PHP 8.6 deprecations that only
+          # trunk fixes so far.
           - wordpress: 'master'
-            php: '8.5'
+            php: '8.6'
+            buddypress: 'trunk'
 
     env:
       WP_ENV_CORE: WordPress/WordPress#${{ matrix.wordpress }}
@@ -81,6 +82,11 @@ jobs:
 
       - name: Install Composer dependencies
         uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
+
+      # BuddyPress trunk runs from its src directory, so it needs no build.
+      - name: Use BuddyPress trunk
+        if: matrix.buddypress == 'trunk'
+        run: echo '{"plugins":[".","buddypress/buddypress#master"]}' > .wp-env.override.json
 
       - name: Start wp-env
         run: npx wp-env start
